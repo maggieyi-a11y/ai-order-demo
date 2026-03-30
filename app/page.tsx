@@ -11,7 +11,7 @@ export default function Dashboard() {
 
   const handleSendMessage = () => {
     if (aiInput.trim()) {
-      router.push(`/chat?message=${encodeURIComponent(aiInput)}`)
+      router.push(`${basePath}/chat?message=${encodeURIComponent(aiInput)}`)
     }
   }
 
@@ -55,7 +55,7 @@ export default function Dashboard() {
                 </svg>
                 <span className="text-[14px] font-medium">Patients</span>
               </a>
-              <a href="/orders" className="flex items-center gap-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50">
+              <a href={`${basePath}/orders`} className="flex items-center gap-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>

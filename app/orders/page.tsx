@@ -11,7 +11,7 @@ export default function OrdersPage() {
 
   const handleSendMessage = () => {
     if (aiInput.trim()) {
-      router.push(`/chat?message=${encodeURIComponent(aiInput)}`)
+      router.push(`${basePath}/chat?message=${encodeURIComponent(aiInput)}`)
     }
   }
 
@@ -54,7 +54,7 @@ export default function OrdersPage() {
         <aside className="w-60 bg-white border-r border-gray-200 flex-shrink-0 overflow-y-auto">
           <nav className="p-3">
             <div className="space-y-0.5">
-              <a href="/" className="flex items-center gap-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50">
+              <a href={`${basePath}/`} className="flex items-center gap-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
@@ -66,7 +66,7 @@ export default function OrdersPage() {
                 </svg>
                 <span className="text-[14px] font-medium">Patients</span>
               </a>
-              <a href="/orders" className="flex items-center gap-3 px-3 py-2 rounded-md bg-blue-50 text-blue-600">
+              <a href={`${basePath}/orders`} className="flex items-center gap-3 px-3 py-2 rounded-md bg-blue-50 text-blue-600">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>

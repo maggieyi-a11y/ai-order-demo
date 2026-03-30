@@ -28,7 +28,7 @@ export default function FinalizePage() {
 
   const handlePlaceOrder = () => {
     alert('Order placed successfully!')
-    router.push('/')
+    router.push(`${basePath}/`)
   }
 
   return (
@@ -37,7 +37,7 @@ export default function FinalizePage() {
       <header className="bg-white border-b border-gray-200">
         <div className="h-14 flex items-center justify-between px-4 relative">
           <div className="flex items-center gap-3">
-            <button onClick={() => router.push('/chat')} className="p-1.5 hover:bg-gray-100 rounded">
+            <button onClick={() => router.push(`${basePath}/chat`)} className="p-1.5 hover:bg-gray-100 rounded">
               <X className="w-5 h-5 text-gray-700" />
             </button>
             <div>
@@ -262,7 +262,7 @@ export default function FinalizePage() {
 
             {/* Back Button */}
             <button
-              onClick={() => router.push('/chat')}
+              onClick={() => router.push(`${basePath}/chat`)}
               className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 text-sm font-medium rounded-md shadow-sm"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

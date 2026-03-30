@@ -192,7 +192,7 @@ function ChatContent() {
       <header className="bg-white border-b border-gray-200">
         <div className="h-14 flex items-center justify-between px-4 relative">
           <div className="flex items-center gap-3">
-            <button onClick={() => router.push('/')} className="p-1.5 hover:bg-gray-100 rounded">
+            <button onClick={() => router.push(`${basePath}/`)} className="p-1.5 hover:bg-gray-100 rounded">
               <X className="w-5 h-5 text-gray-700" />
             </button>
             <span className="text-sm font-medium text-gray-900">New AI-assisted order</span>
@@ -260,7 +260,7 @@ function ChatContent() {
                       {/* Add button if message contains ready to proceed */}
                       {!msg.isUser && msg.content.includes('ready to proceed') && (
                         <button
-                          onClick={() => router.push('/finalize')}
+                          onClick={() => router.push(`${basePath}/finalize`)}
                           className="mt-4 px-4 py-2 bg-white border border-gray-300 text-gray-900 text-sm font-medium rounded-md hover:bg-gray-50 shadow-sm"
                         >
                           Proceed to Final Step
@@ -440,7 +440,7 @@ function ChatContent() {
             {/* Proceed Button */}
             {isComplete && (
               <button
-                onClick={() => router.push('/finalize')}
+                onClick={() => router.push(`${basePath}/finalize`)}
                 className="w-full py-2.5 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 flex-shrink-0"
               >
                 Proceed to Final Step
