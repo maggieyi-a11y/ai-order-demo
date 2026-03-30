@@ -11,7 +11,7 @@ export default function Dashboard() {
 
   const handleSendMessage = () => {
     if (aiInput.trim()) {
-      router.push(`${basePath}/chat?message=${encodeURIComponent(aiInput)}`)
+      router.push(`/chat?message=${encodeURIComponent(aiInput)}`)
     }
   }
 
