@@ -37,7 +37,7 @@ export default function FinalizePage() {
       <header className="bg-white border-b border-gray-200">
         <div className="h-14 flex items-center justify-between px-4 relative">
           <div className="flex items-center gap-3">
-            <button onClick={() => router.push('/chat')} className="p-1.5 hover:bg-gray-100 rounded">
+            <button onClick={() => router.push('/')} className="p-1.5 hover:bg-gray-100 rounded">
               <X className="w-5 h-5 text-gray-700" />
             </button>
             <div>

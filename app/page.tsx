@@ -8,6 +8,7 @@ import { basePath } from './config'
 export default function Dashboard() {
   const router = useRouter()
   const [aiInput, setAiInput] = useState('')
+  const [isAiExpanded, setIsAiExpanded] = useState(true)
 
   const handleSendMessage = () => {
     if (aiInput.trim()) {
@@ -99,22 +100,56 @@ export default function Dashboard() {
         {/* Main Content */}
         <main className="flex-1 overflow-auto bg-[#F5F5F5]">
           <div className="p-6 space-y-6">
-            {/* AI Input Card */}
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-              {/* Gradient top border */}
-              <div className="h-2 bg-gradient-to-r from-blue-500 via-purple-500 via-pink-500 via-orange-500 to-yellow-400"></div>
-
-              <div className="p-6">
-                {/* Header */}
-                <div className="mb-6">
-                  <div className="flex items-center gap-2 mb-2">
-                    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* Header Section with AI Assistant and New buttons */}
+            {!isAiExpanded && (
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h1 className="text-2xl font-bold text-gray-900">Welcome, Dr. Ada</h1>
+                  <p className="text-sm text-gray-600">Welcome to the dashboard of your DS CORE account.</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setIsAiExpanded(true)}
+                    className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-md hover:bg-gray-50 shadow-sm"
+                  >
+                    <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
-                    <h1 className="text-xl font-bold text-gray-900">Welcome, Dr. Ada</h1>
-                  </div>
-                  <p className="text-sm text-gray-600 ml-8">How can I help you today?</p>
+                    <span className="text-sm font-medium text-gray-700">AI assistant</span>
+                  </button>
+                  <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 shadow-sm">
+                    <span className="text-sm font-medium">New</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </button>
                 </div>
+              </div>
+            )}
+
+            {/* AI Input Card */}
+            {isAiExpanded && (
+              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                {/* Gradient top border */}
+                <div className="h-2 bg-gradient-to-r from-blue-500 via-purple-500 via-pink-500 via-orange-500 to-yellow-400"></div>
+
+                <div className="p-6 relative">
+                  {/* Close Button */}
+                  <button
+                    onClick={() => setIsAiExpanded(false)}
+                    className="absolute top-4 right-4 p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+                  >
+                    <X className="w-5 h-5 text-gray-500" />
+                  </button>
+
+                  {/* Header */}
+                  <div className="mb-6 pr-10">
+                    <div className="flex items-center gap-2 mb-2">
+                      <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                      <h1 className="text-xl font-bold text-gray-900">Welcome, Dr. Ada</h1>
+                    </div>
+                    <p className="text-sm text-gray-600 ml-8">How can I help you today?</p>
+                  </div>
 
                 {/* Input Area */}
                 <div className="border border-gray-300 rounded-lg p-4">
@@ -161,13 +196,14 @@ export default function Dashboard() {
                 </p>
               </div>
             </div>
+            )}
 
             {/* Bottom 4 Cards Row */}
-            <div className="grid grid-cols-4 gap-6">
+            <div className={`grid grid-cols-4 gap-6 ${!isAiExpanded ? 'h-[calc(100vh-240px)]' : ''}`}>
               {/* Patients Card */}
-              <div className="bg-white rounded-lg border border-gray-200 p-5">
-                <h2 className="text-base font-bold text-gray-900 mb-4">Patients (57)</h2>
-                <div className="mb-4">
+              <div className="bg-white rounded-lg border border-gray-200 p-5 flex flex-col overflow-hidden">
+                <h2 className="text-base font-bold text-gray-900 mb-4 flex-shrink-0">Patients (57)</h2>
+                <div className="mb-4 flex-shrink-0">
                   <div className="relative">
                     <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
                     <input
@@ -177,7 +213,7 @@ export default function Dashboard() {
                     />
                   </div>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-3 overflow-y-auto flex-1">
                   <div className="text-sm">
                     <p className="font-medium text-gray-900">Briant, Holly</p>
                     <p className="text-xs text-gray-500">Jan 27, 1970</p>
@@ -198,16 +234,36 @@ export default function Dashboard() {
                     <p className="font-medium text-gray-900">Russel, Effion</p>
                     <p className="text-xs text-gray-500">Feb 21, 2006</p>
                   </div>
+                  {!isAiExpanded && (
+                    <>
+                      <div className="text-sm">
+                        <p className="font-medium text-gray-900">Roe, Jane</p>
+                        <p className="text-xs text-gray-500">May 5, 1970</p>
+                      </div>
+                      <div className="text-sm">
+                        <p className="font-medium text-gray-900">Smith, James</p>
+                        <p className="text-xs text-gray-500">May 22, 1985</p>
+                      </div>
+                      <div className="text-sm">
+                        <p className="font-medium text-gray-900">Johnson, Mary</p>
+                        <p className="text-xs text-gray-500">Jul 14, 1992</p>
+                      </div>
+                      <div className="text-sm">
+                        <p className="font-medium text-gray-900">Williams, Robert</p>
+                        <p className="text-xs text-gray-500">Nov 8, 1978</p>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
 
               {/* All Orders Card */}
-              <div className="bg-white rounded-lg border border-gray-200 p-5">
-                <div className="flex items-center justify-between mb-4">
+              <div className="bg-white rounded-lg border border-gray-200 p-5 flex flex-col overflow-hidden">
+                <div className="flex items-center justify-between mb-4 flex-shrink-0">
                   <h2 className="text-base font-bold text-gray-900">All orders (57)</h2>
                   <ChevronDown className="w-5 h-5 text-gray-400" />
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-4 overflow-y-auto flex-1">
                   <div className="text-sm">
                     <div className="flex items-center justify-between mb-1">
                       <p className="font-semibold text-gray-900">2AA009KP</p>
@@ -238,16 +294,40 @@ export default function Dashboard() {
                     <p className="text-xs text-gray-500">Patient: Briant, Holly</p>
                     <p className="text-xs text-gray-500">Owner: Dr. Ada, Angelina</p>
                   </div>
+                  {!isAiExpanded && (
+                    <>
+                      <div className="text-sm">
+                        <div className="flex items-center justify-between mb-1">
+                          <p className="font-semibold text-gray-900">2AA009XU</p>
+                          <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-medium rounded">Completed</span>
+                        </div>
+                        <p className="text-xs text-gray-600">Temporary Restoration</p>
+                        <p className="text-xs text-gray-500">Ordered on: May 10, 2023</p>
+                        <p className="text-xs text-gray-500">Patient: Smith, James</p>
+                        <p className="text-xs text-gray-500">Owner: Dr. Ada, Angelina</p>
+                      </div>
+                      <div className="text-sm">
+                        <div className="flex items-center justify-between mb-1">
+                          <p className="font-semibold text-gray-900">2AA008LJ</p>
+                          <span className="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs font-medium rounded">Requested</span>
+                        </div>
+                        <p className="text-xs text-gray-600">Custom Abutment</p>
+                        <p className="text-xs text-gray-500">Ordered on: Apr 4, 2023</p>
+                        <p className="text-xs text-gray-500">Patient: Johnson, Mary</p>
+                        <p className="text-xs text-gray-500">Owner: Dr. Ada, Angelina</p>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
 
               {/* Collaboration Card */}
-              <div className="bg-white rounded-lg border border-gray-200 p-5">
-                <div className="flex items-center justify-between mb-4">
+              <div className="bg-white rounded-lg border border-gray-200 p-5 flex flex-col overflow-hidden">
+                <div className="flex items-center justify-between mb-4 flex-shrink-0">
                   <h2 className="text-base font-bold text-gray-900">Collaboration</h2>
                   <ChevronDown className="w-5 h-5 text-gray-400" />
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-4 overflow-y-auto flex-1">
                   <div className="text-sm">
                     <p className="font-medium text-gray-900 mb-1">Share of Endo, Tim</p>
                     <p className="text-xs text-gray-500">From with Dr. Ada, Angelina</p>
@@ -272,16 +352,32 @@ export default function Dashboard() {
                     <p className="text-xs text-gray-500">21 days left</p>
                     <p className="text-xs text-gray-600 mt-1">Sent</p>
                   </div>
+                  {!isAiExpanded && (
+                    <>
+                      <div className="text-sm">
+                        <p className="font-medium text-gray-900 mb-1">Share of Smith, James</p>
+                        <p className="text-xs text-gray-500">Shared with Dr. Ada, Angelina</p>
+                        <p className="text-xs text-gray-500">15 days left</p>
+                        <p className="text-xs text-gray-600 mt-1">Sent</p>
+                      </div>
+                      <div className="text-sm">
+                        <p className="font-medium text-gray-900 mb-1">Share of Johnson, Mary</p>
+                        <p className="text-xs text-gray-500">From with Dr. Ada, Angelina</p>
+                        <p className="text-xs text-gray-500">25 days left</p>
+                        <p className="text-xs text-gray-600 mt-1">Received</p>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
 
               {/* Treatments Card */}
-              <div className="bg-white rounded-lg border border-gray-200 p-5">
-                <div className="flex items-center justify-between mb-4">
+              <div className="bg-white rounded-lg border border-gray-200 p-5 flex flex-col overflow-hidden">
+                <div className="flex items-center justify-between mb-4 flex-shrink-0">
                   <h2 className="text-base font-bold text-gray-900">Treatments</h2>
                   <ChevronDown className="w-5 h-5 text-gray-400" />
                 </div>
-                <div className="space-y-4">
+                <div className="space-y-4 overflow-y-auto flex-1">
                   <div className="text-sm">
                     <p className="font-medium text-gray-900 mb-1">AA0204</p>
                     <p className="text-xs text-gray-600">Treatment name</p>
@@ -290,19 +386,37 @@ export default function Dashboard() {
                     <p className="text-xs text-gray-500">Owner: Dr. Ada, Angelina</p>
                   </div>
                   <div className="text-sm">
-                    <p className="font-medium text-gray-900 mb-1">AA0204</p>
+                    <p className="font-medium text-gray-900 mb-1">AA0205</p>
                     <p className="text-xs text-gray-600">Treatment name</p>
                     <p className="text-xs text-gray-500">Created on: May 3, 2023</p>
                     <p className="text-xs text-gray-500">Patient: Briant, Holly</p>
                     <p className="text-xs text-gray-500">Owner: Dr. Ada, Angelina</p>
                   </div>
                   <div className="text-sm">
-                    <p className="font-medium text-gray-900 mb-1">AA0204</p>
+                    <p className="font-medium text-gray-900 mb-1">AA0206</p>
                     <p className="text-xs text-gray-600">Treatment name</p>
                     <p className="text-xs text-gray-500">Created on: May 3, 2023</p>
                     <p className="text-xs text-gray-500">Patient: Briant, Holly</p>
                     <p className="text-xs text-gray-500">Owner: Dr. Ada, Angelina</p>
                   </div>
+                  {!isAiExpanded && (
+                    <>
+                      <div className="text-sm">
+                        <p className="font-medium text-gray-900 mb-1">AA0207</p>
+                        <p className="text-xs text-gray-600">Treatment name</p>
+                        <p className="text-xs text-gray-500">Created on: May 10, 2023</p>
+                        <p className="text-xs text-gray-500">Patient: Smith, James</p>
+                        <p className="text-xs text-gray-500">Owner: Dr. Ada, Angelina</p>
+                      </div>
+                      <div className="text-sm">
+                        <p className="font-medium text-gray-900 mb-1">AA0208</p>
+                        <p className="text-xs text-gray-600">Treatment name</p>
+                        <p className="text-xs text-gray-500">Created on: Apr 15, 2023</p>
+                        <p className="text-xs text-gray-500">Patient: Johnson, Mary</p>
+                        <p className="text-xs text-gray-500">Owner: Dr. Ada, Angelina</p>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
